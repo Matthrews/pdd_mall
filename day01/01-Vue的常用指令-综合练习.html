@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>01-Vue的常用指令-综合练习</title>
+    <style>
+        #app {
+            margin: 50px auto;
+            width: 600px;
+        }
+
+        fieldset {
+            border: 1px solid orangered;
+            margin-bottom: 20px;
+        }
+
+        fieldset input {
+            width: 200px;
+            height: 30px;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 600px;
+            border: 2px solid orangered;
+            text-align: center;
+        }
+
+        thead {
+            background-color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--第一部分-->
+        <fieldset>
+            <legend>撩课学院(itlike.com)学生录入系统</legend>
+            <div>
+                <span>姓名:</span>
+                <input type="text" placeholder="请输入姓名" v-model="newStudent.name">
+            </div>
+            <div>
+                <span>年龄:</span>
+                <input type="text" placeholder="请输入年龄" v-model="newStudent.age">
+            </div>
+            <div>
+                <span>性别:</span>
+                <select v-model="newStudent.sex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div>
+                <span>手机:</span>
+                <input type="text" placeholder="请输入手机号码" v-model="newStudent.phone">
+            </div>
+            <button @click="createNewStu()">创建新用户</button>
+        </fieldset>
+        <!--第二部分-->
+        <table>
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>年龄</td>
+                    <td>手机</td>
+                    <td>删除</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(stu, index) in students" :key="index">
+                    <td>{{stu.name}}</td>
+                    <td>{{stu.sex}}</td>
+                    <td>{{stu.age}}</td>
+                    <td>{{stu.phone}}</td>
+                    <td>
+                        <button @click="delStudent(index)">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/vue-resource.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            mounted() {
+                this.getStudentList();
+            },
+            data: {
+                students: [
+                    { name: '张三', sex: '女', age: 19, phone: '18921212121' },
+                    { name: '李四', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '赵六', sex: '男', age: 49, phone: '18921556121' }
+                ],
+                newStudent: { name: '', sex: '男', age: 0, phone: '' }
+            },
+            methods: {
+                // 获取学生列表
+                getStudentList() {
+                    this.$http.get('http://127.0.0.1:3000/api/getStuList').then(response => {
+                        console.log(response.body);
+                    }, response => {
+                        alert('网络发生错误!');
+                    });
+                },
+                // 插入记录
+                createNewStu() {
+                    // 1. 姓名不能为空
+                    if (this.newStudent.name === '') {
+                        alert('姓名不能为空!');
+                        return;
+                    }
+
+                    // 2. 验证年龄
+                    if (this.newStudent.age <= 0) {
+                        alert('请输入正确的年龄!');
+                        return;
+                    }
+
+                    // 3. 验证手机
+                    if (this.newStudent.phone === '') {
+                        alert('请输入正确的手机号码!');
+                        return;
+                    }
+
+                    // 4. 插入新纪录
+                    this.students.unshift(this.newStudent);
+
+                    // 5. 清空数据
+                    this.newStudent = { name: '', sex: '男', age: 0, phone: '' }
+                },
+                // 删除记录
+                delStudent(index) {
+                    this.students.splice(index, 1);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

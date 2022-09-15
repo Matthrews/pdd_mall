@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/style/style.css' />
+  </head>
+  <body>
+    <form action="/api/stulist"  method="post">
+        <input type="text" name="name"/>
+        <input type="text" name="age"/>
+        <select name="sex">
+          <option value="男">男</option>
+          <option value="女">女</option>
+        </select>
+        <input type="text" name="phone"/>
+        <input type="submit"/>
+    </form>
+  </body>
+</html>
