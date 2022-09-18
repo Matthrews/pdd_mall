@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>01-Vue的常用指令-综合练习</title>
+    <style>
+        #app {
+            margin: 50px auto;
+            width: 600px;
+        }
+
+        .search {
+            outline: none;
+            width: 400px;
+            height: 30px;
+            padding-left: 10px;
+            font-size: 18px;
+        }
+
+        table {
+            width: 600px;
+            border: 2px solid orangered;
+            text-align: center;
+        }
+
+        thead {
+            background-color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--第一部分-->
+        <p>
+            搜搜关键字:
+            <input type="text" class="search" v-model="keywords">
+        </p>
+        <!--第二部分-->
+        <table>
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>年龄</td>
+                    <td>手机</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(stu, index) in searchList(keywords)" :key="index">
+                    <td>{{stu.name}}</td>
+                    <td>{{stu.sex}}</td>
+                    <td>{{stu.age}}</td>
+                    <td>{{stu.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                keywords: '', // 搜索关键字
+                students: [
+                    { name: '张三', sex: '女', age: 19, phone: '18921212121' },
+                    { name: '李四', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '赵六', sex: '男', age: 49, phone: '18921556121' },
+                    { name: '李四', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '李四', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '赵六', sex: '男', age: 49, phone: '18921556121' },
+                    { name: '李思思', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '张三', sex: '女', age: 19, phone: '18921212121' },
+                    { name: '李四', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '赵六', sex: '男', age: 49, phone: '18921556121' },
+                    { name: '李四', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '李四', sex: '男', age: 29, phone: '18921221121' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '王五', sex: '女', age: 39, phone: '18921788721' },
+                    { name: '赵六', sex: '男', age: 49, phone: '18921556121' },
+                    { name: '李五五', sex: '男', age: 29, phone: '18921221121' }
+                ],
+            },
+            methods: {
+                // 数组
+                searchList(keyWords) {
+                    return this.students.filter((student) => {
+                        if (student.name.includes(keyWords)) {
+                            return student;
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

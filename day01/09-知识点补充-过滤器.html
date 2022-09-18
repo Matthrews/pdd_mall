@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <p>单价: {{money | moneyFormat()}}</p>
+        <p>总价: {{total | moneyFormat()}}</p>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        // 1. 定义全局过滤器
+        Vue.filter('moneyFormat', (money) => {
+            return '¥' + money + '.000';
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                money: 189898,
+                total: 1
+            },
+            methods: {
+
+            },
+            filters: {
+                // 2. 局部过滤器
+                moneyFormat(money) {
+                    return '$' + money + '.0';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

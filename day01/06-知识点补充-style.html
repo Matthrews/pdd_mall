@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <p style="font-size: 18px; background-color:red;">众里寻他千百度.....</p>
+        <p :style="style1">众里寻他千百度.....</p>
+        <p :style="[style1, style2]">众里寻他千百度.....</p>
+    </div>
+    <!--
+  style
+	1.  直接在元素上通过 `:style` 的形式，书写样式对象
+	2.  将样式对象，定义到 `data` 中，并直接引用到 `:style` 中
+	3.  在 `:style` 中通过数组，引用多个 `data` 上的样式对象
+-->
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                style1: { 'color': 'green', 'fontSize': '40px' },
+                style2: { 'font-style': 'italic' }
+            }
+        });
+    </script>
+</body>
+
+</html>

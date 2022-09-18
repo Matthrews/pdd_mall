@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box1 {
+            width: 300px;
+            height: 40px;
+            border: 1px solid orangered;
+        }
+
+        .box2 {
+            font-size: 30px;
+        }
+
+        .box3 {
+            background-color: goldenrod;
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+  class
+	 1.  直接传递一个数组，注意： 这里的 class 需要使用  v-bind 做数据绑定;
+	 2.  在数组中使用表达式;
+	 3.  在数组中使用 对象来代替三元表达式，提高代码的可读性;
+	 4.  在为class使用v-bind绑定对象的时候，对象的属性是类名，由于对象的属性可带引号，也可不带引号，所以 这里我没写引号；  属性的值 是一个标识符
+	代码演示
+-->
+    <div id="app">
+        <p class="box1 box2">众里寻他千百度.....</p>
+        <p :class="['box1', 'box2']">众里寻他千百度.....</p>
+        <p :class="['box1', 'box2', isShow ? 'box3': '']">众里寻他千百度.....</p>
+        <p :class="[{'box1': isShow}]">众里寻他千百度.....</p>
+        <p :class="classObj">众里寻他千百度.....</p>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isShow: true,
+                classObj: { 'box1': true, 'box2': true, 'box3': true }
+            }
+        });
+    </script>
+</body>
+
+</html>

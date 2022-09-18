@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-for="count in 10">第{{count}}次, 总计 10次</p>
+
+        <ul ref="ulParent">
+            <li style="height: 60px;">1</li>
+            <li style="height: 30px;">2</li>
+            <li style="height: 50px;">3</li>
+            <li style="height: 160px;">4</li>
+            <li style="height: 10px;">5</li>
+        </ul>
+
+        <button @click="getAllLiHeight()">获取高度数组</button>
+        <button @click="dealSome()">验证some</button>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                dataArr: ['撩课', 'itlike11.com', '哈哈哈哈']
+            },
+            methods: {
+                getAllLiHeight() {
+                    let liHeightArr = [];
+                    // 1. 获取dom元素
+                    let allLis = this.$refs.ulParent.getElementsByTagName('li');
+                    // console.log(allLis);
+                    // console.log(Array.prototype.slice.call(allLis));
+                    Array.prototype.slice.call(allLis).forEach(li => {
+                        liHeightArr.push(li.clientHeight);
+                    });
+                    console.log(liHeightArr);
+                },
+
+                dealSome() {
+                    let result = this.dataArr.some((str) => {
+                        return str === 'itlike.com';
+                    });
+                    console.log(result);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="isShow">{{str1}}</p>
+        <p v-else>{{str2}}</p>
+        <button @click="destory">销毁</button>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isShow: false,
+                str1: '撩课学院',
+                str2: 'itlike.com'
+            },
+            methods: {
+                destory() {
+                    this.$destroy();
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate()');
+            },
+            created() {
+                console.log('created()');
+            },
+            beforeMount() {
+                console.log('beforeMount()');
+            },
+            mounted() {
+                console.log('mounted()');
+                this.intervalId = setInterval(() => {
+                    console.log('++++++---+++++');
+                    this.isShow = !this.isShow;
+                }, 1000);
+            },
+
+            beforeUpdate() {
+                console.log('beforeUpdate()');
+            },
+            updated() {
+                console.log('updated()');
+            },
+
+            beforeDestroy() {
+                console.log('beforeDestroy()');
+                // 销毁定时器
+                clearInterval(this.intervalId);
+            },
+            destroyed() {
+                console.log('destroyed()');
+            }
+        });
+    </script>
+</body>
+
+</html>
