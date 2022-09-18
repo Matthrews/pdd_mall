@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="cpName = 'login'">登录</button>
+        <button @click="cpName ='register'">注册</button>
+
+        <component :is="cpName"></component>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        // 1. 创建组件
+        Vue.component('login', {
+            template: '<h2 style="background-color: red; width: 100px; height: 100px;">我要登录</h2>'
+        });
+
+        Vue.component('register', {
+            template: '<h2 style="background-color: green; width: 200px; height: 200px;">我要注册</h2>'
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                cpName: 'login'
+            }
+        });
+    </script>
+</body>
+
+</html>

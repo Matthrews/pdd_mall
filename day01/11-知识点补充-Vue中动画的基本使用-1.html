@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+            transform: translateX(200px);
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: all 1.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="show = !show">切换</button>
+
+        <transition name="fade">
+            <div class="box" v-if="show">撩课学院</div>
+        </transition>
+
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: false
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            border: 1px dashed palevioletred;
+            margin: 5px;
+            line-height: 35px;
+            padding-left: 10px;
+            font-size: 12px;
+            width: 40%;
+        }
+
+        li:hover {
+            background-color: palevioletred;
+            transition: all 0.8s ease;
+        }
+
+        .singer-enter,
+        .singer-leave-to {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .singer-enter-active,
+        .singer-leave-active {
+            transition: all 0.6s ease;
+        }
+
+        .singer-move {
+            transition: all 1s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label>歌手: <input type="text" v-model="singer"></label>
+            <label>歌名: <input type="text" v-model="name"></label>
+            <button @click="add()">添加</button>
+        </div>
+        <transition-group tag="ul" appear name="singer">
+            <li v-for="(item, index) in list" :key="index" @click="del(index)">
+                {{item.singer}}:{{item.name}}
+            </li>
+        </transition-group>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                singer: '',
+                name: '',
+                list: [
+                    { singer: '周杰伦', name: '东风破' },
+                    { singer: '谢霆锋', name: '因为爱, 所以爱' },
+                    { singer: '那英', name: '默' },
+                    { singer: '刘德华', name: '忘情水' },
+                ]
+            },
+            methods: {
+                add() {
+                    this.list.push({ singer: this.singer, name: this.name });
+                    this.singer = this.name = '';
+                },
+                del(i) {
+                    this.list.splice(i, 1);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

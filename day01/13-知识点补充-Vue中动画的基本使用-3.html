@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="lib/animate.css">
+</head>
+
+<body>
+    <div id="app">
+        <button @click="flag = !flag">切换</button>
+        <p></p>
+
+        <transition enter-active-class="swing" leave-active-class="bounceOut" :duration="{enter: 1000, leave:1000}">
+            <img v-if="flag" class="animated" src="img/img_02.jpg" alt="" width="200">
+        </transition>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            }
+        });
+    </script>
+</body>
+
+</html>
